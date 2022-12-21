@@ -1,0 +1,94 @@
+html {
+    box-sizing: border-box;
+    background: #00ff8c;
+    font-family: 'helvetica neue';
+    font-size: 20px;
+    font-weight: 200;
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  .panels {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex; /*da idu jedan pored drugog, a ne jedan ispod drugog*/
+  }
+
+  .panel {
+    background: #6B0F9C;
+    box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
+    color: white;
+    text-align: center;
+    align-items: center;
+    /* Safari transitionend event.propertyName === flex */
+    /* Chrome + FF transitionend event.propertyName === flex-grow */
+    transition:
+      font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+      flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+      background 0.2s;
+    font-size: 20px;
+    background-size: cover;
+    background-position: center;
+    display: flex; /*postavlja sve od leva do desno da stane u jedan red*/
+    flex: 1; /* omogucava da svaki pojedinacni panel zauzme jednako mesto na slici koje je preostalo*/
+    justify-content: center; /*centrira na x osi ali nista se ne desi zato sto nije display:flex; postavljeno */ 
+    align-items: center; /*centrira na y osi ali nista se ne desi zato sto nije display:flex; postavljeno */
+    flex-direction: column; /*pravimo da bude kolona a ne red*/
+  }
+
+  .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
+  .panel2 { background-image:url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500); }
+  .panel3 { background-image:url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d); }
+  .panel4 { background-image:url(https://source.unsplash.com/ITjiVXcwVng/1500x1500); }
+  .panel5 { background-image:url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500); }
+
+  /* Flex Children */
+  .panel > * { /*children od .panel, odnosno sve * */
+    margin: 0;
+    width: 100%;
+    transition: transform 0.5s;
+    /*border: 1px solid red;*/
+    flex: 1 0 auto; /*stavljas koliko ce da ti zauzima svaki children u okviru panela, u ovom slucaju stavljas da zauzimaju 33%*/
+    display: flex; /*tekst ode na levu stranu*/
+    justify-content: center; /*postavljanje sve na x osi da bude na sredini*/
+    align-items: center; /*postavljanje sve na x osi da bude na sredini*/
+  }
+
+  .panel p {
+    text-transform: uppercase;
+    font-family: 'Amatic SC', cursive;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+    font-size: 2em;
+  }
+  
+  .panel > *:first-child { transform: translateY(-100%);} /*pravis ga da se ne vidi na ekranu tj da je iznad i kada se iskljuci transform onda ce da uleti opet u svoj deo*/
+  .panel > *:last-child { transform: translateY(100%);} /*pravis ga da se ne vidi na ekranu tj da je ispod i kada se iskljuci transform onda ce da uleti opet u svoj deo*/
+  .panel.open-active > *:first-child { transform: translateY(0);} /*pravis da kada se doda class open-active da se deo teksta vraca dole*/
+  .panel.open-active > *:last-child { transform: translateY(0);} /*pravis da kada se doda class open-active da se deo teksta vraca dole*/
+
+
+
+  .panel p:nth-child(2) {
+    font-size: 4em;
+  }
+
+  .panel.open {
+    flex: 5; /*kada je otvoren zauzece 5* vise mesta nego kada nije otvoren*/
+    font-size: 30px;
+  }
+
+    
+  @media only screen and (max-width:600px) { /*ne znam za sta je ovo ali imam problema gde kada su svi paneli otvoreni, ovaj koji mi je skroz desno ode van ekrana i nisu svi jednakih proporcija*/
+    .panel p {
+      font-size:1em;
+    }    
+  }
+    
+
+

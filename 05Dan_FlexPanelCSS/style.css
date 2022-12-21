@@ -16,7 +16,7 @@ html {
 
   .panels {
     min-height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /*ovo dodaj na SAT projekat*/
     display: flex; /*da idu jedan pored drugog, a ne jedan ispod drugog*/
   }
 
